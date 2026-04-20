@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "Member": {
+      "title": "Customer",
+      "description": "Data pemesan kaos",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "description": "Nama lengkap pemesan" },
+        "email": { "type": "string", "format": "email", "description": "Alamat email" },
+        "phone": { "type": "string", "description": "Nomor WhatsApp/Telepon" },
+        "size": { "type": "string", "description": "Ukuran Kaos (S, M, L, XL, etc)" },
+        "address": { "type": "string", "description": "Alamat Lengkap Pengiriman" },
+        "motivation": { "type": "string", "description": "Catatan Tambahan Pesanan" },
+        "ktaImageUrl": { "type": "string", "description": "URL Foto KTA Pemesan" },
+        "status": { 
+          "type": "string", 
+          "enum": ["pending", "approved", "rejected"],
+          "description": "Status Pesanan"
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fullName", "email", "phone", "status"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Administrator organisasi",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["super", "moderator"] }
+      }
+    }
+  },
+  "firestore": {
+    "/members/{memberId}": {
+      "schema": "Member",
+      "description": "Koleksi pendaftaran anggota"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Koleksi administrator"
+    }
+  }
+}
